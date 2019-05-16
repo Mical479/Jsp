@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -45,39 +46,26 @@
     <span class="systemlogo"></span>
 
     <br/>
-    <%
-        //声明java代码块进行错误提示语的逻辑校验
-        Object flag = request.getAttribute("flag");
-        if (flag != null) {
-    %>
-    <div style="text-align: center;">
-        <span style="font-size: 15px;color: white;font-weight: bold">用户名或密码错误</span>
-    </div>
-    <% } %>
-
-    <%
-        //声明java代码块进行密码修改提示语
-        Object pwd = session.getAttribute("pwd");
-        if (pwd != null) {
-    %>
-    <div style="text-align: center;">
-        <span style="font-size: 15px;color: white;font-weight: bold">密码修改成功</span>
-    </div>
-    <% }
-        session.removeAttribute("pwd");
-    %>
-
-    <%
-        //声明java代码块进行密码修改提示语
-        Object reg = session.getAttribute("reg");
-        if (reg != null) {
-    %>
-    <div style="text-align: center;">
-        <span style="font-size: 15px;color: white;font-weight: bold">注册成功，请登录</span>
-    </div>
-    <% }
-        session.removeAttribute("reg");
-    %>
+    <%--使用jstl和el表达式完成提示语--%>
+    <c:choose>
+        <c:when test="${flag==0}">
+            <div style="text-align: center;">
+                <span style="font-size: 15px;color: white;font-weight: bold">用户名或密码错误</span>
+            </div>
+        </c:when>
+        <c:when test="${flag==1}">
+            <div style="text-align: center;">
+                <span style="font-size: 15px;color: white;font-weight: bold">密码修改成功</span>
+            </div>
+        </c:when>
+        <c:when test="${flag==2}">
+            <div style="text-align: center;">
+                <span style="font-size: 15px;color: white;font-weight: bold">注册成功</span>
+            </div>
+        </c:when>
+    </c:choose>
+    <%--移除session中的flag标记--%>
+    <c:remove var="flag" scope="session" />
 
     <div class="loginbox loginbox1">
         <form action="user" method="post">
@@ -90,7 +78,8 @@
                                  onclick="JavaScript:this.value=''"/></span><cite>X3D5S</cite>
                 </li>
                 <li><input name="" type="submit" class="loginbtn" value="登录"
-                           onclick="javascript:window.location='main.html'"/><label><a href="main/user/reg.jsp">注册</a></label><label><a
+                           onclick="javascript:window.location='main.html'"/><label><a
+                        href="main/user/reg.jsp">注册</a></label><label><a
                         href="#">忘记密码？</a></label></li>
             </ul>
         </form>

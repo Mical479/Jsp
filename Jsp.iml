@@ -22,5 +22,6 @@
     <orderEntry type="library" exported="" scope="PROVIDED" name="Tomcat 9.0.141" level="application_server_libraries" />
     <orderEntry type="library" name="mysql-connector-java-8.0.15" level="project" />
     <orderEntry type="library" name="log4j-1.2.17" level="project" />
+    <orderEntry type="library" name="jstl" level="project" />
   </component>
 </module>

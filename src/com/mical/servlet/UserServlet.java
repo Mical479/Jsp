@@ -57,13 +57,6 @@ public class UserServlet extends HttpServlet {
         } else {
             logger.debug("没有找到对应的操作符：" + oper);
         }
-        //获取请求信息
-
-        //处理请求信息
-        //响应处理结果
-        //直接响应
-        //请求转发
-        //重定向
     }
 
     private void userReg(HttpServletRequest req, HttpServletResponse resp) {
@@ -88,7 +81,7 @@ public class UserServlet extends HttpServlet {
         if (index > 0) {
             //获取session
             HttpSession hs = req.getSession();
-            hs.setAttribute("reg", "true");
+            hs.setAttribute("flag", 2);
             System.out.println(u);
             //重定向
             try {
@@ -125,7 +118,7 @@ public class UserServlet extends HttpServlet {
         if (index > 0) {
             //获取session对象
             HttpSession hs = req.getSession();
-            hs.setAttribute("pwd", "true");
+            hs.setAttribute("flag", 1);
 
             //重定向到登录页面
             try {

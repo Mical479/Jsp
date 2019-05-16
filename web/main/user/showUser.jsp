@@ -1,12 +1,12 @@
-<%@ page import="com.mical.pojo.User" %>
-<%@ page import="java.util.List" %><%--
+<%--
   Created by IntelliJ IDEA.
-  User: 17578
+  User: Mical
   Date: 2019/5/13
   Time: 20:24
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -66,30 +66,21 @@
         </tr>
         </thead>
         <tbody>
-        <%
-            List<User> lu = (List<User>) request.getAttribute("lu");
-            for (User u : lu) {
-        %>
-        <tr>
-            <td><%=u.getUid()%>
-            </td>
-            <td><%=u.getUname()%>
-            </td>
-            <td><%=u.getPwd()%>
-            </td>
-            <%
-                if (u.getSex().equals("1")) {
-            %>
-            <td>男</td>
-            <% } else { %>
-            <td>女</td>
-            <% } %>
-            <td><%=u.getAge()%>
-            </td>
-            <td><%=u.getBirth()%>
-            </td>
-        </tr>
-        <% } %>
+        <c:forEach items="${lu}" var="u">
+            <tr>
+                <td>${u.uid}
+                </td>
+                <td>${u.uname}
+                </td>
+                <td>${u.pwd}
+                </td>
+                <td>${u.sex=="1"?'男':'女'}</td>
+                <td>${u.age}
+                </td>
+                <td>${u.birth}
+                </td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
 
